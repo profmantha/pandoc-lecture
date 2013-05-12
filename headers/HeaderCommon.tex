@@ -1,0 +1,86 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written by Jordan Mantha
+% Adapted from BeamerLecture V1.1 by Don Eisenstein
+% http://faculty.chicagobooth.edu/donald.eisenstein/more/BeamerLecture.html
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Common Header
+\usepackage{hyperref}
+\setbeamertemplate{footline}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Reset some default colors for itemize/enumerate/description environments
+%
+\setbeamercolor{description item}{fg=darkred!80!black}  %  Color of key word in desciption 
+%
+\definecolor{darkred}{rgb}{0.7,0,0}
+\setbeamercolor{item}{fg=green}  %  The dot color
+\definecolor{darkblue}{rgb}{0,0,0.8}
+\setbeamercolor{itemize/enumerate body}{fg=black}    % Text Level 1
+\setbeamercolor{itemize/enumerate subbody}{fg=darkblue}    % Text Level 2
+\setbeamercolor{itemize/enumerate subsubbody}{fg=green!25!black}    % Text Level 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  ALERT, STUCT and HUSH commands
+%
+% Usage:   Make \alrt{THIS RED}
+%          The secret is \hush{cubs win}
+%          The secret is revealed \hushalrt{in red}
+%
+\newcommand{\alrt}[1]{{\color{alert} #1}}
+\newcommand{\alrtl}[1]{{\color{alert}\large #1}}
+\newcommand{\alrtL}[1]{{\color{alert}\Large #1}}
+\newcommand{\struc}[1]{{\color{structure} #1}}
+\newcommand{\strucL}[1]{{\color{structure}\Large #1}}
+\newcommand{\strucl}[1]{{\color{structure}\large #1}}
+%
+\newcommand{\dred}[1]{{\color{darkred} #1}}
+\newcommand{\dredl}[1]{{\color{darkred}\large #1}}
+\newcommand{\dredL}[1]{{\color{darkred}\Large #1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\hush}{\hushit}
+%
+\newcommand{\hushalrt}[1]{\hushit{{\color{alert} #1}}}
+\newcommand{\hushalrtl}[1]{\hushit{{\large\color{alert} #1}}}
+\newcommand{\hushalrtL}[1]{\hushit{{\Large\color{alert} #1}}}
+\newcommand{\hushstruc}[1]{\hushit{{\color{structure} #1}}}
+\newcommand{\hushstrucl}[1]{\hushit{{\large\color{structure} #1}}}
+\newcommand{\hushstrucL}[1]{\hushit{{\Large\color{structure} #1}}}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Used to reset basic black for itemize/enumerates within certain environments
+%
+\newcommand{\blackcolors}{\setbeamercolor{itemize/enumerate body}{fg=black}%
+\setbeamercolor{itemize/enumerate subbody}{fg=black}%
+\setbeamercolor{itemize/enumerate subsubbody}{fg=black}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  used with transstruc and transalert environment to shade hidden text
+%
+\newcommand{\cover}{\setbeamercovered{invisible}}
+\newcommand{\semicover}{\setbeamercovered{transparent=30}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Try these instead of the itemize environments, that is:  
+%
+% \begin{ialert}
+%   \item hello
+%   \item hello again
+% \end{ialert}
+%
+%  iitemize is a standard, to reveal successive items on successive slides
+%
+\newenvironment{iitemize}{\pause\begin{itemize}[<+->]}{\end{itemize}}
+\newenvironment{ienumerate}{\pause\begin{enumerate}[<+->]}{\end{enumerate}}
+\newenvironment{idescription}{\pause\begin{description}[<+->][.]}{\end{description}}
+%
+%  These others are fancier, higlightling the current item, making hidden
+%   items translucent, etc..  Try them out to see. 
+%
+\newenvironment{ialert}{\pause\begin{itemize}[<+-| alert@+>]\blackcolors}{\end{itemize}}
+\newenvironment{ishowalert}{\begin{itemize}[<1-| alert@+>]\blackcolors}{\end{itemize}} 
+\newenvironment{itrans}{\semicover\pause\begin{itemize}[<+->]}{\end{itemize}\cover}
+\newenvironment{itransalert}{\semicover\begin{itemize}[<+-| alert@+>]\blackcolors}{\end{itemize}\cover}
+%%%%

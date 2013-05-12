@@ -1,0 +1,28 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written by Jordan Mantha
+% Adapted from BeamerLecture V1.1 by Don Eisenstein
+% http://faculty.chicagobooth.edu/donald.eisenstein/more/BeamerLecture.html
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Lecture Header
+\newcommand{\hushit}{\only<handout:0>}
+\newcommand{\hushitem}{\hspace{0pt}}
+\newcommand{\hushframe}{\frame<handout:0>}
+\newcommand{\classonlyframe}{\frame<0>}
+\newcommand{\lectureonlyframe}{\frame}
+%%% Set the theme
+\usecolortheme{orchid}
+\useinnertheme{circles}
+\usefonttheme{structurebold}
+%%%
+%%% Slide number in top right
+\beamertemplatenavigationsymbolsempty
+\setbeamerfont{page number in head/foot}{size={\fontsize{9}{9}}}
+\defbeamertemplate{headline}{frame number}{%
+    \vskip1pt%
+    \setbeamertemplate{footline}[frame number]%
+    \usebeamertemplate{footline}%
+    \vspace{-2em}
+}
+\setbeamertemplate{headline}[frame number]
+%%%%
