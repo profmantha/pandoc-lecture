@@ -1,6 +1,6 @@
 pdflecture()
 {
-pandoc -s -i -t beamer -H headers/HeaderLecture.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
+pandoc -s -i --template=default.beamer -t beamer -H headers/HeaderLecture.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
 pdflatex yap.tex
 pdflatex yap.tex
 cp yap.pdf ${*%.*}Lecture.pdf
@@ -9,7 +9,7 @@ cp yap.pdf ${*%.*}Lecture.pdf
 
 pdfnote()
 {
-pandoc -s -t beamer -V handout -V notes -H headers/HeaderNotes.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
+pandoc -s --template=default.beamer -t beamer -V handout -V notes -H headers/HeaderNotes.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
 pdflatex yap.tex
 cp yap.pdf ${*%.*}Notes.pdf
 /bin/rm yap.* 
@@ -17,7 +17,7 @@ cp yap.pdf ${*%.*}Notes.pdf
 
 pdfhandout()
 {
-pandoc -s -t beamer -V handout -H headers/HeaderHandout.tex -H headers/HeaderCommon.tex  ${*%.*}.md > yap.tex
+pandoc -s --template=default.beamer -t beamer -V handout -H headers/HeaderHandout.tex -H headers/HeaderCommon.tex  ${*%.*}.md > yap.tex
 pdflatex yap.tex
 cp yap.pdf ${*%.*}Handout.pdf
 /bin/rm yap.* 
@@ -25,7 +25,7 @@ cp yap.pdf ${*%.*}Handout.pdf
 
 pdfpost()
 {
-pandoc -s -t beamer -V handout -H headers/HeaderPost.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
+pandoc -s --template=default.beamer -t beamer -V handout -H headers/HeaderPost.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
 pdflatex yap.tex
 cp yap.pdf ${*%.*}Post.pdf
 /bin/rm yap.tex yap.pdf 
