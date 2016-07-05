@@ -1,14 +1,14 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Written by Jordan Mantha
-% Adapted from BeamerLecture V1.1 by Don Eisenstein
-% http://faculty.chicagobooth.edu/donald.eisenstein/more/BeamerLecture.html
+% Copyright 2013, 2016 Jordan Mantha <jordan.mantha@gmail.com>
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% Post-lecture upload
-\newcommand{\hushit}{\only<handout:0->}
-\newcommand{\hushitem}{\hspace{0pt}}
-\newcommand{\hushframe}{\frame}
-\newcommand{\classonlyframe}{\frame<handout:0>}
+%%%% Handout for class
+\newcommand{\hushit}{\phantom}
+\newcommand{\hushitem}{\hspace{0pt}\phantom}
+\newcommand{\hushframe}{\frame<handout:0>}
+\newcommand{\classonlyframe}{\frame}
 \newcommand{\lectureonlyframe}{\frame<handout:0>}
 %%% Set the theme
 \usepackage{beamerthemedefault}  % Clean, less color, easy on printing
@@ -16,7 +16,7 @@
 \useinnertheme{circles}
 \usefonttheme{structurebold}
 %%%
-%%% Slide number in the top right
+%%% Slide number in top right
 \defbeamertemplate{headline}{my header}
 { \leavevmode%
   \hbox{%
@@ -27,3 +27,5 @@
 }
 \setbeamertemplate{headline}[my header]
 %%%%
+
+\input{headers/common.tex}

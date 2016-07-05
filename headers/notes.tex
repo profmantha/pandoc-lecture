@@ -1,0 +1,33 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Written by Jordan Mantha
+% Copyright 2013, 2016 Jordan Mantha <jordan.mantha@gmail.com>
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Notes Header
+\newcommand{\hushit}{\only<handout:0->}
+\newcommand{\hushitem}{\hspace{0pt}}
+\newcommand{\hushframe}{\frame}
+\newcommand{\classonlyframe}{\frame<handout:0>}
+\newcommand{\lectureonlyframe}{\frame<handout:0>}
+%%% Set the theme
+\usepackage{beamerthemedefault}  % Clean, less color, easy on printing
+\usecolortheme{dove}
+\useinnertheme{circles}
+\usefonttheme{structurebold}
+%%%
+\usetemplatenote[plain]{}
+%%% Set slide number in top right
+\setbeamerfont{page number in head/foot}{size={\fontsize{10}{12}}}
+\defbeamertemplate{headline}{frame number}
+{
+  \hfill%
+  \usebeamercolor[fg]{page number in head/foot}%
+  \usebeamerfont{page number in head/foot}%
+  \insertframenumber\kern1em\vskip2pt%
+  \vspace{-1em}
+}
+\setbeamertemplate{headline}[frame number]
+%%%%
+
+\input{headers/common.tex}

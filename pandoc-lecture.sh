@@ -1,42 +1,117 @@
-pdflecture()
-{
-pandoc -s -i --template=default.beamer -t beamer -H headers/HeaderLecture.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
-pdflatex yap.tex
-pdflatex yap.tex
-cp yap.pdf ${*%.*}Lecture.pdf
-/bin/rm yap.*
+#!/bin/bash
+
+### Defaults
+
+# Flavor of TeX used to build pdf: pdflatex, xelatex, lualatex
+ENGINE="xelatex"
+
+# Add any pandoc options that you want to apply to all building (i.e. --slide-level)
+PANDOC_OPTS=""
+
+# Header file locations
+HEADER_DIR="./headers"
+#If HEADER_DIR is changed, update the \input lines at the end of the following files
+SLIDES_HEADER=$HEADER_DIR/"slides.tex"
+NOTES_HEADER=$HEADER_DIR/"notes.tex"
+HANDOUTS_HEADER=$HEADER_DIR/"handout.tex"
+POST_HEADER=$HEADER_DIR/"post.tex"
+
+
+### Getting Setup
+
+# Command help (called with -h or --help)
+function msg_help {
+	echo "Usage: pandoc-lecture [OPTIONS] [FILE]
+This command is used to build beamer lectures (slides, handouts, and speaking notes)
+from Markdown source files using Pandoc.
+The command options are:
+  -s  Build slides for presentation
+  -n  Build speaker notes pages for use when presenting (using \note{})
+  -c  Build class handouts with missing pieces (using \hush{})
+  -p  Build complete handouts for posting to LMS, etc.
+  -a  Build all of the above
+  --clean  Remove auxillary LaTeX files
+  -h  or  --help  You are here."
 }
 
-pdfnote()
-{
-pandoc -s --template=default.beamer -t beamer -V handout -V notes -H headers/HeaderNotes.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
-pdflatex yap.tex
-cp yap.pdf ${*%.*}Notes.pdf
-/bin/rm yap.* 
-}
+# Parse command-line options and set build flags
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    -a) do_all=true; shift 1;;
+    -s) do_slides=true; shift 1;;
+    -n) do_notes=true; shift 1;;
+    -c) do_handouts=true; shift 1;;
+    -p) do_post=true; shift 1;;
+    -h) msg_help; shift 1;;
+    --help) msg_help; shift 1;;
+    --clean) do_clean=true; shift 1;;
 
-pdfhandout()
-{
-pandoc -s --template=default.beamer -t beamer -V handout -H headers/HeaderHandout.tex -H headers/HeaderCommon.tex  ${*%.*}.md > yap.tex
-pdflatex yap.tex
-cp yap.pdf ${*%.*}Handout.pdf
-/bin/rm yap.* 
-}
-
-pdfpost()
-{
-pandoc -s --template=default.beamer -t beamer -V handout -H headers/HeaderPost.tex -H headers/HeaderCommon.tex ${*%.*}.md > yap.tex
-pdflatex yap.tex
-cp yap.pdf ${*%.*}Post.pdf
-/bin/rm yap.tex yap.pdf 
-}
+    -*) echo "unknown option: $1" >&2; exit 1;;
+    *) MD_FILE="$1"; shift 1;;
+  esac
+done
 
 
-pdfall()
-{
-pdflecture $*
-pdfhandout $*
-pdfpost $*
-pdfnote $*
-}
+### Build the Files
 
+# Build lecture slides
+if [ $do_all ] || [ $do_slides ]; then
+	echo "##### Building lecture slides #####"
+	OUTFILE="${MD_FILE%.*}_slides"
+	pandoc -s -i -t beamer --latex-engine=$ENGINE -H $SLIDES_HEADER $PANDOC_OPTS \
+	    -o $OUTFILE.tex $MD_FILE
+	if [ $ENGINE == "pdflatex" ]; then
+		latexmk -pdf $OUTFILE
+	else
+		latexmk -$ENGINE $OUTFILE
+	fi	
+fi
+
+# Build speaker notes
+if [ $do_all ] || [ $do_notes ]; then
+	echo "##### Building speaker notes #####"
+	OUTFILE="${MD_FILE%.*}_notes"
+	pandoc -s -t beamer -V handout -V notes --latex-engine=$ENGINE -H $NOTES_HEADER $PANDOC_OPTS \
+		-o $OUTFILE.tex $MD_FILE
+	if [ $ENGINE == "pdflatex" ]; then
+		latexmk -pdf $OUTFILE
+	else
+		latexmk -$ENGINE $OUTFILE
+	fi	
+fi
+
+# Build class handouts
+if [ $do_all ] || [ $do_handouts ]; then
+	echo "##### Building class handouts #####"
+	OUTFILE="${MD_FILE%.*}_handouts"
+	pandoc -s -t beamer -V handout --latex-engine=$ENGINE -H $HANDOUTS_HEADER $PANDOC_OPTS \
+		-o $OUTFILE.tex $MD_FILE
+	if [ $ENGINE == "pdflatex" ]; then
+		latexmk -pdf $OUTFILE
+	else
+		latexmk -$ENGINE $OUTFILE
+	fi
+fi
+
+# Build post-lecture handouts
+if [ $do_all ] || [ $do_post ]; then
+	echo "##### Building handouts for posting #####"
+	OUTFILE="${MD_FILE%.*}_post"
+	pandoc -s -t beamer -V handout --latex-engine=$ENGINE -H $POST_HEADER $PANDOC_OPTS \
+		-o $OUTFILE.tex $MD_FILE
+	if [ $ENGINE == "pdflatex" ]; then
+		latexmk -pdf $OUTFILE
+	else
+		latexmk -$ENGINE $OUTFILE
+	fi
+fi
+
+# Clean up auxiliary files
+if [ $do_clean ]; then
+	echo "##### Cleaning auxiliary files #####"
+	OUTFILE="${MD_FILE%.*}"
+	for i in "_slides" "_notes" "_handouts" "_post"; do
+		latexmk -c $OUTFILE$i
+		rm $OUTFILE$i.nav $OUTFILE$i.snm $OUTFILE$i.tex
+	done
+fi
