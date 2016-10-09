@@ -7,19 +7,25 @@
 %%%% Common Header
 \usepackage{hyperref}
 \setbeamertemplate{footline}{}
-
+\useoutertheme{metropolis}
+\useinnertheme{metropolis}
+\usefonttheme{metropolis}
+% Comment out below if using Owl color theme (white on black)
+\usecolortheme{metropolis}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Reset some default colors for itemize/enumerate/description environments
-%
-\setbeamercolor{description item}{fg=darkred!80!black}  %  Color of key word in desciption 
+%  Reset some default colors
 %
 \definecolor{darkred}{rgb}{0.7,0,0}
-\setbeamercolor{item}{fg=green}  %  The dot color
 \definecolor{darkblue}{rgb}{0,0,0.8}
-\setbeamercolor{itemize/enumerate body}{fg=black}    % Text Level 1
-\setbeamercolor{itemize/enumerate subbody}{fg=darkblue}    % Text Level 2
-\setbeamercolor{itemize/enumerate subsubbody}{fg=green!25!black}    % Text Level 3
+%\setbeamercolor{item}{fg=green}  %  The dot color
+%\setbeamercolor{alert}{fg=red}
+%\setbeamercolor{structure}{fg=blue}
+%\setbeamercolor{frametitle}{fg=red}
+%\setbeamercolor{description item}{fg=darkred!80!black}  %  Color of key word in desciption 
+%
+% owl color theme colors: red, green, blue, yellow, violet, brown, orange, cyan
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  ALERT, STUCT and HUSH commands
@@ -31,12 +37,12 @@
 %          The secret is \hush{cubs win}
 %          The secret is revealed \hushalrt{in red}
 %
-\newcommand{\alrt}[1]{{\color{alert} #1}}
-\newcommand{\alrtl}[1]{{\color{alert}\large #1}}
-\newcommand{\alrtL}[1]{{\color{alert}\Large #1}}
-\newcommand{\struc}[1]{{\color{structure} #1}}
-\newcommand{\strucL}[1]{{\color{structure}\Large #1}}
-\newcommand{\strucl}[1]{{\color{structure}\large #1}}
+\newcommand{\alrt}[1]{{\color{red} #1}}
+\newcommand{\alrtl}[1]{{\color{red}\large #1}}
+\newcommand{\alrtL}[1]{{\color{red}\Large #1}}
+\newcommand{\struc}[1]{{\color{blue} #1}}
+\newcommand{\strucL}[1]{{\color{blue}\Large #1}}
+\newcommand{\strucl}[1]{{\color{blue}\large #1}}
 %
 \newcommand{\dred}[1]{{\color{darkred} #1}}
 \newcommand{\dredl}[1]{{\color{darkred}\large #1}}
@@ -44,12 +50,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\hush}{\hushit}
 %
-\newcommand{\hushalrt}[1]{\hushit{{\color{alert} #1}}}
-\newcommand{\hushalrtl}[1]{\hushit{{\large\color{alert} #1}}}
-\newcommand{\hushalrtL}[1]{\hushit{{\Large\color{alert} #1}}}
-\newcommand{\hushstruc}[1]{\hushit{{\color{structure} #1}}}
-\newcommand{\hushstrucl}[1]{\hushit{{\large\color{structure} #1}}}
-\newcommand{\hushstrucL}[1]{\hushit{{\Large\color{structure} #1}}}
+\newcommand{\hushalrt}[1]{\hushit{{\color{red} #1}}}
+\newcommand{\hushalrtl}[1]{\hushit{{\large\color{red} #1}}}
+\newcommand{\hushalrtL}[1]{\hushit{{\Large\color{red} #1}}}
+\newcommand{\hushstruc}[1]{\hushit{{\color{blue} #1}}}
+\newcommand{\hushstrucl}[1]{\hushit{{\large\color{blue} #1}}}
+\newcommand{\hushstrucL}[1]{\hushit{{\Large\color{blue} #1}}}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %

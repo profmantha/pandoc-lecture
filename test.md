@@ -1,9 +1,12 @@
-% Lecture Title
-% Instructor
-% University Name \
-  Semester Year
+---
+title: "Lecture Title"
+author: "Instructor"
+institute: "University Name"
+date: "Semester Year"
+fontsize: 12pt
+...
 
-# Outline
+## Outline
 
 1. First outline item
 1. Second outline item
@@ -14,8 +17,9 @@
 Put instructor notes within this structure. It will only appear in the Notes version.
 }
 
+# Missing Pieces
 
-# Using the "hush" command
+## Using the "hush" command
 
 * The Handout version of the lecture has blanks where content is enclosed in \\hush{} commands
 * This item is \hush{missing} some text
@@ -30,7 +34,9 @@ Put instructor notes within this structure. It will only appear in the Notes ver
 \end{itemize}
 }
 
-# Color terms
+# Using Colors
+
+## Color terms
 
 * Here is \alrt{red text} using \\alrt{}
 * Here is bigger \alrtl{red text} using \\alrtl{}
@@ -48,7 +54,9 @@ If no note command is used, the slide will not appear in the Notes version.
 Use a blank space to make a slide with no notes appear in the Notes pdf.
 }
 
-# Special list environments
+# Cool List Effects
+
+## Special list environments
 
 \begin{ialert}
   \item the \struc{ialert} environment
